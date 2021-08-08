@@ -1,0 +1,11 @@
+.ico {
+  cursor: pointer;
+  margin-bottom: 3px;
+  opacity: 0.5;
+  transition: all ease-in 0.3s;
+}
+
+.ico:hover {
+  opacity: 1;
+  transform: scale(1.3);
+}

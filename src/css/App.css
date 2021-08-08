@@ -1,0 +1,35 @@
+#htmlCode {
+  background-image: url(/src/images/icons8-html-5.svg);
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-size: 40px;
+  background-position: bottom right;
+  background-blend-mode: lighten;
+  color: "white";
+  border-radius: "10px";
+}
+
+#cssCode {
+  background-image: url(/src/images/icons8-css3.svg);
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-size: 40px;
+  background-position: bottom right;
+  background-blend-mode: lighten;
+  color: "white";
+  border-radius: "10px";
+}
+
+#jsCode {
+  background-image: url(/src/images/javascript-seeklogo.com.svg);
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-size: 40px;
+  background-position: bottom right;
+  background-blend-mode: lighten;
+  color: "white";
+  border-radius: "10px";
+}
