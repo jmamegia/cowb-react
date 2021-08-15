@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { GridContextProvider } from "./context/GridContext";
+import { RenderContextProvider } from "./context/RenderContext";
 import "../css/App.css";
 import Grid from "./Grid";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <div className="App">
       <GridContextProvider>
-        <Grid></Grid>
+        <RenderContextProvider>
+          <Grid></Grid>
+        </RenderContextProvider>
       </GridContextProvider>
     </div>
   );

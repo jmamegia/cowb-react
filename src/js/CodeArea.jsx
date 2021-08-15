@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import AceEditor from "react-ace";
 import { useDocument } from "./hooks/useDocument";
@@ -38,6 +38,7 @@ export default function (props) {
     maximized,
     toggleMaximized,
     setFontSize,
+    value,
   } = props;
 
   const fontSizeSetter = (increment) => {
@@ -48,8 +49,10 @@ export default function (props) {
   };
 
   return (
-    <>
+    <div className="code-gride">
       <AceEditor
+        placeholder={languaje}
+        value={value}
         mode={languaje}
         theme={themeLanguajes[languaje]}
         width="100%"
@@ -68,7 +71,6 @@ export default function (props) {
           useWorker: false,
         }}
         style={{
-          backgroundColor: "transparent",
           color: "white",
           borderRadius: "10px",
         }}
@@ -78,6 +80,6 @@ export default function (props) {
         maximized={maximized}
         toggleMaximized={toggleMaximized}
       />
-    </>
+    </div>
   );
 }

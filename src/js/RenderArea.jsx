@@ -4,24 +4,19 @@ import ActionButton from "./ActionButton";
 import { useDocument } from "./hooks/useDocument";
 import GridContext from "./context/GridContext";
 
-export default function () {
-  const { renderAreaMaximized, setRenderAreaMaximized, showingControls } =
-    useContext(GridContext);
+export default function (props) {
+  const { showingControls } = useContext(GridContext);
   const { document } = useDocument();
-  const type = renderAreaMaximized ? "Minimize" : "Maximize";
+  const { maximized, toggleMaximized } = props;
+  const type = maximized ? "Minimize" : "Maximize";
   return (
     <div id="webPrev">
-      <iframe
-        name="webPrev"
-        srcDoc={document}
-        className={` ${renderAreaMaximized ? "maximized" : ""}`}
-      ></iframe>
+      <iframe name="webPrev" srcDoc={document}></iframe>
       {showingControls && (
         <ActionButton
           type={type}
-          onClick={() => setRenderAreaMaximized(!renderAreaMaximized)}
+          onClick={toggleMaximized}
           className="ico ico-float"
-          className={`ico ico-float ${renderAreaMaximized ? "max" : ""}`}
           size="medium"
           color="grey"
         />

@@ -1,9 +1,18 @@
 import AppContext from "../context/RenderContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { encodeUrl, decodeUrl } from "../helpers/urlDecoder";
 
 export function useDocument() {
   const { html, css, javascript, setHtml, setCss, setJavascript } =
     useContext(AppContext);
+  useEffect(() => {
+    const { pathname } = window.location;
+    const { html, css, js } = decodeUrl(pathname);
+    setCss(css);
+    setHtml(html);
+    setJavascript(js);
+  }, []);
+
   const document = /*HTML*/ `
         <html lang="en">
         <head>
@@ -12,9 +21,7 @@ export function useDocument() {
         <body>
             ${html}
             <script>
-                try{
                     ${javascript}
-                }catch(e){/*console.error(e)*/}
             </script>
         </body>
         </html>
@@ -22,11 +29,25 @@ export function useDocument() {
 
   const codeUpdated = (value, slotCode) => {
     const updateMap = {
-      htmlCode: () => setHtml(value),
-      cssCode: () => setCss(value),
-      jsCode: () => setJavascript(value),
+      htmlCode: () => {
+        setHtml(value);
+        setUrl(value, css, javascript);
+      },
+      cssCode: () => {
+        setCss(value);
+        setUrl(html, value, javascript);
+      },
+      jsCode: () => {
+        setJavascript(value);
+        setUrl(html, css, value);
+      },
     };
     updateMap[slotCode]();
+  };
+
+  const setUrl = (html, css, js) => {
+    const hashedCode = encodeUrl(html, css, js);
+    window.history.replaceState(null, null, `/${hashedCode}`);
   };
 
   return { document, codeUpdated };
