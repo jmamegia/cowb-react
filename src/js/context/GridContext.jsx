@@ -3,20 +3,16 @@ import React, { useState } from "react";
 const Context = React.createContext();
 
 export const GridContextProvider = ({ children }) => {
-  const [htmlFontSize, setHtmlFontSize] = useState(13);
-  const [cssFontSize, setCssFontSize] = useState(13);
-  const [javascriptFontSize, setJavascriptFontSize] = useState(13);
-  const [showingControls, setShowingControls] = useState(true);
-
+  const [cols, setCols] = useState([33, 33, 33]);
+  const [rows, setRows] = useState([35, 65]);
+  const [slotMaximiced, setSlotMaximiced] = useState(null);
   let context = {
-    htmlFontSize,
-    cssFontSize,
-    javascriptFontSize,
-    setHtmlFontSize,
-    setCssFontSize,
-    setJavascriptFontSize,
-    showingControls,
-    setShowingControls,
+    cols,
+    setCols,
+    rows,
+    setRows,
+    slotMaximiced,
+    setSlotMaximiced,
   };
 
   return <Context.Provider value={context}>{children}</Context.Provider>;

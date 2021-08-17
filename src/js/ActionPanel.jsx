@@ -1,29 +1,32 @@
-import React, { useContext } from "react";
+import React from "react";
 import "../css/actionPanel.css";
 import ActionButton from "./ActionButton";
-import GridContext from "./context/GridContext";
+import { useOptions } from "./hooks/useOptions";
+import { useGrid } from "./hooks/useGrid";
 
 export default function (props) {
-  const { maximized, toggleMaximized, setFonSize } = props;
+  const { slot } = props;
+  const { showingControls, maximized, setFontSize } = useOptions(slot);
+  const { toggleMaximiced } = useGrid();
+
   const maximizeStatus = maximized ? "Minimize" : "Maximize";
-  const { showingControls } = useContext(GridContext);
   if (showingControls) {
     return (
       <div className="panel">
         <ActionButton
           type={maximizeStatus}
           size="medium"
-          onClick={toggleMaximized}
+          onClick={() => toggleMaximiced(slot)}
         />
         <ActionButton
           type="ZoomIn"
           size="medium"
-          onClick={() => setFonSize(true)}
+          onClick={() => setFontSize(true)}
         />
         <ActionButton
           type="ZoomOut"
           size="medium"
-          onClick={() => setFonSize(false)}
+          onClick={() => setFontSize(false)}
         />
       </div>
     );

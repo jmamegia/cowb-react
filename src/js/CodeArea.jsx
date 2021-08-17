@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import AceEditor from "react-ace";
 import { useDocument } from "./hooks/useDocument";
+import { useOptions } from "./hooks/useOptions";
 
 import "ace-builds/src-noconflict/mode-html";
 import "ace-builds/src-noconflict/mode-javascript";
@@ -28,25 +29,8 @@ export default function (props) {
     css: "kr_theme",
     javascript: "dracula",
   };
-
-  const {
-    id,
-    languaje = "html",
-    fontSize = "12px",
-    autocompletion = true,
-    snippets = true,
-    maximized,
-    toggleMaximized,
-    setFontSize,
-    value,
-  } = props;
-
-  const fontSizeSetter = (increment) => {
-    let size;
-    if (increment) size = fontSize + 1;
-    else size = fontSize - 1;
-    setFontSize(size);
-  };
+  const { id, languaje, autocompletion = true, snippets = true, value } = props;
+  const { fontSize } = useOptions(languaje);
 
   return (
     <div className="code-gride">
@@ -75,11 +59,7 @@ export default function (props) {
           borderRadius: "10px",
         }}
       />
-      <ActionPanel
-        setFonSize={fontSizeSetter}
-        maximized={maximized}
-        toggleMaximized={toggleMaximized}
-      />
+      <ActionPanel slot={languaje} />
     </div>
   );
 }

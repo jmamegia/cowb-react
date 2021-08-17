@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import "../css/navBar.css";
 import ActionButton from "./ActionButton";
-import GridContext from "./context/GridContext";
+import optionContext from "./context/OptionsContext";
 
 export default function () {
-  const { showingControls, setShowingControls } = useContext(GridContext);
+  const { showingControls, setShowingControls } = useContext(optionContext);
   const type = showingControls ? "OpenEye" : "CloseEye";
   return (
     <ul>

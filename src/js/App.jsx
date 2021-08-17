@@ -1,17 +1,20 @@
 import React from "react";
-import { GridContextProvider } from "./context/GridContext";
+import { OptionContextProvider } from "./context/OptionsContext";
 import { RenderContextProvider } from "./context/RenderContext";
 import "../css/App.css";
 import Grid from "./Grid";
+import { GridContextProvider } from "./context/GridContext";
 
 function App() {
   return (
     <div className="App">
-      <GridContextProvider>
+      <OptionContextProvider>
         <RenderContextProvider>
-          <Grid></Grid>
+          <GridContextProvider>
+            <Grid></Grid>
+          </GridContextProvider>
         </RenderContextProvider>
-      </GridContextProvider>
+      </OptionContextProvider>
     </div>
   );
 }

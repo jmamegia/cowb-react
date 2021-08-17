@@ -1,50 +1,15 @@
 import React, { useContext, useState } from "react";
 import CodeArea from "./CodeArea";
-//import CodeArea from "./CodeAreaMonaco";
-//import Split from "split-grid";
-import { decodeUrl } from "./helpers/urlDecoder";
 import Split from "react-split";
 import RenderArea from "./RenderArea";
 import RenderContext from "./context/RenderContext";
-import GridContext from "./context/GridContext";
 import "../css/grid.css";
 import NavBar from "./NavBar";
+import { useGrid } from "./hooks/useGrid";
 
 export default function Grid() {
-  const {
-    htmlFontSize,
-    setHtmlFontSize,
-    cssFontSize,
-    setCssFontSize,
-    javascriptFontSize,
-    setJavascriptFontSize,
-  } = useContext(GridContext);
   const { html, css, javascript } = useContext(RenderContext);
-  const [cols, setCols] = useState([33, 33, 33]);
-  const [rows, setRows] = useState([35, 65]);
-  const [slotMaximiced, setSlotMaximiced] = useState(null);
-  const resetGrid = () => {
-    setCols([33, 33, 33]);
-    setRows([35, 65]);
-    setSlotMaximiced(null);
-  };
-
-  function toggleMaximiced(slot) {
-    if (slotMaximiced) resetGrid();
-    else if (slot === "renderArea") {
-      setCols([0, 0, 0]);
-      setRows([0, 100]);
-      setSlotMaximiced(slot);
-    } else {
-      setCols([
-        slot === "html" ? 100 : 0,
-        slot === "css" ? 100 : 0,
-        slot === "javascript" ? 100 : 0,
-      ]);
-      setRows([100, 0]);
-      setSlotMaximiced(slot);
-    }
-  }
+  const { slotMaximiced, cols, rows } = useGrid();
 
   const GutterSize = slotMaximiced ? 0 : 3;
 
@@ -86,8 +51,6 @@ export default function Grid() {
                 languaje="html"
                 value={html}
                 maximized={slotMaximiced === "html" ? true : false}
-                fontSize={htmlFontSize}
-                setFontSize={setHtmlFontSize}
                 toggleMaximized={() => toggleMaximiced("html")}
               />
             </div>
@@ -103,8 +66,6 @@ export default function Grid() {
                 languaje="css"
                 value={css}
                 maximized={slotMaximiced === "css" ? true : false}
-                fontSize={cssFontSize}
-                setFontSize={setCssFontSize}
                 toggleMaximized={() => toggleMaximiced("css")}
               />
             </div>
@@ -121,8 +82,6 @@ export default function Grid() {
                 languaje="javascript"
                 value={javascript}
                 maximized={slotMaximiced === "javascript" ? true : false}
-                fontSize={javascriptFontSize}
-                setFontSize={setJavascriptFontSize}
                 toggleMaximized={() => toggleMaximiced("javascript")}
               />
             </div>
