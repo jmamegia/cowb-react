@@ -1,15 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import "../css/renderArea.css";
 import ActionButton from "./ActionButton";
 import { useDocument } from "./hooks/useDocument";
-import optionContext from "./context/OptionsContext";
 import { useGrid } from "./hooks/useGrid";
 
 export default function (props) {
-  const { showingControls } = useContext(optionContext);
   const { document } = useDocument();
-  const { maximized, toggleMaximiced } = useGrid();
-  const type = maximized ? "Minimize" : "Maximize";
+  const { slotMaximiced, toggleMaximiced, showingControls } = useGrid();
+  const type = slotMaximiced === "renderArea" ? "Minimize" : "Maximize";
   return (
     <div id="webPrev">
       <iframe name="webPrev" srcDoc={document}></iframe>

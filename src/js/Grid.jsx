@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import CodeArea from "./CodeArea";
 import Split from "react-split";
 import RenderArea from "./RenderArea";
@@ -69,6 +69,7 @@ export default function Grid() {
                 toggleMaximized={() => toggleMaximiced("css")}
               />
             </div>
+
             <div
               className={`code-grid ${
                 slotMaximiced !== null && slotMaximiced !== "javascript"

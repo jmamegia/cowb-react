@@ -2,8 +2,16 @@ import { useContext } from "react";
 import gridContext from "../context/GridContext";
 
 export function useGrid() {
-  const { cols, setCols, rows, setRows, slotMaximiced, setSlotMaximiced } =
-    useContext(gridContext);
+  const {
+    cols,
+    setCols,
+    rows,
+    setRows,
+    slotMaximiced,
+    setSlotMaximiced,
+    showingControls,
+    setSowingControls,
+  } = useContext(gridContext);
 
   const resetGrid = () => {
     setCols([33, 33, 33]);
@@ -28,5 +36,16 @@ export function useGrid() {
     }
   }
 
-  return { cols, rows, slotMaximiced, toggleMaximiced };
+  function toggleShowControls() {
+    setSowingControls(!showingControls);
+  }
+
+  return {
+    cols,
+    rows,
+    slotMaximiced,
+    toggleMaximiced,
+    toggleShowControls,
+    showingControls,
+  };
 }

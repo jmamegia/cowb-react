@@ -1,42 +1,14 @@
-import { useContext } from "react";
-import optionContext from "../context/OptionsContext";
+import { useState } from "react";
 
-export const useOptions = (slot) => {
-  const {
-    htmlFontSize,
-    cssFontSize,
-    javascriptFontSize,
-    setHtmlFontSize,
-    setCssFontSize,
-    setJavascriptFontSize,
-    showingControls,
-    setShowingControls,
-  } = useContext(optionContext);
+export const useOptions = () => {
+  const [fontSize, setFontSize] = useState(13);
 
-  const slotActionSelector = (action) => {
-    const slotMap = {
-      html: { setFontSize: setHtmlFontSize, getFontSize: htmlFontSize },
-      css: { setFontSize: setCssFontSize, getFontSize: cssFontSize },
-      javascript: {
-        setFontSize: setJavascriptFontSize,
-        getFontSize: javascriptFontSize,
-      },
-    };
-    return slotMap[slot][action];
-  };
-
-  const setFontSize = (increment) => {
+  const fontSizeSetter = (increment) => {
     let size;
     if (increment) size = fontSize + 1;
     else size = fontSize - 1;
-    slotActionSelector("setFontSize")(size);
+    setFontSize(size);
   };
 
-  const toggleShowControls = () => {
-    setShowingControls(!showingControls);
-  };
-
-  const fontSize = slotActionSelector("getFontSize");
-
-  return { setFontSize, fontSize, toggleShowControls, showingControls };
+  return { fontSize, fontSizeSetter };
 };

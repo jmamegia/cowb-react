@@ -1,15 +1,13 @@
 import React from "react";
 import "../css/actionPanel.css";
 import ActionButton from "./ActionButton";
-import { useOptions } from "./hooks/useOptions";
 import { useGrid } from "./hooks/useGrid";
 
 export default function (props) {
-  const { slot } = props;
-  const { showingControls, maximized, setFontSize } = useOptions(slot);
-  const { toggleMaximiced } = useGrid();
-
-  const maximizeStatus = maximized ? "Minimize" : "Maximize";
+  const { slot, fontSizeSetter } = props;
+  const { toggleMaximiced, slotMaximiced } = useGrid();
+  const showingControls = true;
+  const maximizeStatus = slotMaximiced === slot ? "Minimize" : "Maximize";
   if (showingControls) {
     return (
       <div className="panel">
@@ -21,12 +19,12 @@ export default function (props) {
         <ActionButton
           type="ZoomIn"
           size="medium"
-          onClick={() => setFontSize(true)}
+          onClick={() => fontSizeSetter(true)}
         />
         <ActionButton
           type="ZoomOut"
           size="medium"
-          onClick={() => setFontSize(false)}
+          onClick={() => fontSizeSetter(false)}
         />
       </div>
     );

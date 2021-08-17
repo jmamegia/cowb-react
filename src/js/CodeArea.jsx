@@ -21,16 +21,13 @@ import ActionPanel from "./ActionPanel";
 
 export default function (props) {
   const { codeUpdated } = useDocument();
-  function onChange(newValue, id) {
-    codeUpdated(newValue, id);
-  }
   const themeLanguajes = {
     html: "monokai",
     css: "kr_theme",
     javascript: "dracula",
   };
   const { id, languaje, autocompletion = true, snippets = true, value } = props;
-  const { fontSize } = useOptions(languaje);
+  const { fontSize, fontSizeSetter } = useOptions();
 
   return (
     <div className="code-gride">
@@ -42,7 +39,7 @@ export default function (props) {
         width="100%"
         height="100%"
         fontSize={fontSize}
-        onChange={(newValue) => onChange(newValue, id)}
+        onChange={(newValue) => codeUpdated(newValue, id)}
         highlightActiveLine={false}
         enableBasicAutocompletion={autocompletion}
         enableLiveAutocompletion={autocompletion}
@@ -59,7 +56,7 @@ export default function (props) {
           borderRadius: "10px",
         }}
       />
-      <ActionPanel slot={languaje} />
+      <ActionPanel fontSizeSetter={fontSizeSetter} slot={languaje} />
     </div>
   );
 }

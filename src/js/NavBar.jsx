@@ -1,19 +1,15 @@
-import React, { useContext } from "react";
+import React from "react";
 import "../css/navBar.css";
 import ActionButton from "./ActionButton";
-import optionContext from "./context/OptionsContext";
+import { useGrid } from "./hooks/useGrid";
 
 export default function () {
-  const { showingControls, setShowingControls } = useContext(optionContext);
+  const { showingControls, toggleShowControls } = useGrid();
   const type = showingControls ? "OpenEye" : "CloseEye";
   return (
     <ul>
       <li>
-        <ActionButton
-          type={type}
-          size="big"
-          onClick={() => setShowingControls(!showingControls)}
-        />
+        <ActionButton type={type} size="big" onClick={toggleShowControls} />
       </li>
     </ul>
   );
