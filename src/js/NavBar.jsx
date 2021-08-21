@@ -7,10 +7,12 @@ export default function () {
   const { showingControls, toggleShowControls } = useGrid();
   const type = showingControls ? "OpenEye" : "CloseEye";
   return (
-    <ul>
-      <li>
-        <ActionButton type={type} size="big" onClick={toggleShowControls} />
-      </li>
-    </ul>
+    <nav className="nav">
+      <ul>
+        <li>
+          <ActionButton type={type} size="big" onClick={toggleShowControls} />
+        </li>
+      </ul>
+    </nav>
   );
 }

@@ -20,7 +20,7 @@ export default function Grid() {
       <Split
         style={{
           display: "flex",
-          height: "85vh",
+          height: "95vh",
           flexFlow: "column",
         }}
         sizes={rows}
