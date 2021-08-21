@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import AceEditor from "react-ace";
 import { useDocument } from "./hooks/useDocument";
@@ -7,6 +7,7 @@ import { useOptions } from "./hooks/useOptions";
 import "ace-builds/src-noconflict/mode-html";
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/mode-css";
+import "ace-builds/src-noconflict/ext-options";
 
 import "ace-builds/src-noconflict/snippets/html";
 import "ace-builds/src-noconflict/snippets/javascript";
@@ -18,6 +19,8 @@ import "ace-builds/src-noconflict/theme-dracula";
 
 import "ace-builds/src-min-noconflict/ext-language_tools";
 import ActionPanel from "./ActionPanel";
+import EmmetCore from "emmet-core";
+import Emmet from "ace-builds/src-min-noconflict/ext-emmet";
 
 export default function (props) {
   const { codeUpdated } = useDocument();
@@ -26,9 +29,10 @@ export default function (props) {
     css: "kr_theme",
     javascript: "dracula",
   };
-  const { id, languaje, autocompletion = true, snippets = true, value } = props;
-  const { fontSize, fontSizeSetter } = useOptions();
-
+  const { id, languaje, value } = props;
+  const { fontSize, fontSizeSetter, typeHelpers, toggleTypeHelpers } =
+    useOptions();
+  const emmet = languaje === "html" && typeHelpers;
   return (
     <div className="code-gride">
       <AceEditor
@@ -41,22 +45,28 @@ export default function (props) {
         fontSize={fontSize}
         onChange={(newValue) => codeUpdated(newValue, id)}
         highlightActiveLine={false}
-        enableBasicAutocompletion={autocompletion}
-        enableLiveAutocompletion={autocompletion}
-        enableSnippets={snippets}
+        enableBasicAutocompletion={typeHelpers}
+        enableLiveAutocompletion={false}
+        enableSnippets={true}
         showPrintMargin={false}
         name={id}
         editorProps={{ $blockScrolling: true }}
         setOptions={{
           highlightSelectedWord: false,
           useWorker: false,
+          enableEmmet: emmet,
         }}
         style={{
           color: "white",
           borderRadius: "10px",
         }}
       />
-      <ActionPanel fontSizeSetter={fontSizeSetter} slot={languaje} />
+      <ActionPanel
+        fontSizeSetter={fontSizeSetter}
+        slot={languaje}
+        typeHelpers={typeHelpers}
+        toggleTypeHelpers={toggleTypeHelpers}
+      />
     </div>
   );
 }

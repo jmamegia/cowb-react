@@ -8,6 +8,8 @@
   },
   "dependencies": {
     "ace-builds": "1.4.12",
+    "emmet": "^2.3.4",
+    "emmet-core": "^1.0.0",
     "js-base64": "3.6.1",
     "react": "17.0.0",
     "react-ace": "9.4.3",

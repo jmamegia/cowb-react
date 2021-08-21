@@ -2,6 +2,7 @@ import { useState } from "react";
 
 export const useOptions = () => {
   const [fontSize, setFontSize] = useState(13);
+  const [typeHelpers, setTypeHelpers] = useState(true);
 
   const fontSizeSetter = (increment) => {
     let size;
@@ -10,5 +11,9 @@ export const useOptions = () => {
     setFontSize(size);
   };
 
-  return { fontSize, fontSizeSetter };
+  function toggleTypeHelpers() {
+    setTypeHelpers(!typeHelpers);
+  }
+
+  return { fontSize, fontSizeSetter, typeHelpers, toggleTypeHelpers };
 };

@@ -4,15 +4,19 @@ import ActionButton from "./ActionButton";
 import { useGrid } from "./hooks/useGrid";
 
 export default function (props) {
-  const { slot, fontSizeSetter } = props;
+  const { slot, fontSizeSetter, typeHelpers, toggleTypeHelpers } = props;
   const { toggleMaximiced, slotMaximiced } = useGrid();
   const showingControls = true;
-  const maximizeStatus = slotMaximiced === slot ? "Minimize" : "Maximize";
+  const maximizeStatusIcon = slotMaximiced === slot ? "Minimize" : "Maximize";
+  const typeHelpersIcon = typeHelpers
+    ? "AutocompletionOn"
+    : "AutocompletionOff";
+
   if (showingControls) {
     return (
       <div className="panel">
         <ActionButton
-          type={maximizeStatus}
+          type={maximizeStatusIcon}
           size="medium"
           onClick={() => toggleMaximiced(slot)}
         />
@@ -25,6 +29,11 @@ export default function (props) {
           type="ZoomOut"
           size="medium"
           onClick={() => fontSizeSetter(false)}
+        />
+        <ActionButton
+          type={typeHelpersIcon}
+          size="medium"
+          onClick={toggleTypeHelpers}
         />
       </div>
     );
