@@ -1,10 +1,10 @@
 import * as React from "react";
 
 function SvgComponent(props) {
-  const { fill } = props;
+  const { fill, title } = props;
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" {...props}>
-      <title>{"code"}</title>
+      <title>{title}</title>
       <g fill="none" fillRule="evenodd">
         <path d="M-2.449-6.59h24.91v24.955H-2.45z" />
         <path

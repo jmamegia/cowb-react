@@ -5,10 +5,10 @@ nav {
   right: 0;
   margin: auto;
   margin-top: 0;
-  height: 5vh;
+  height: 50px;
   max-height: 50px;
-  transform: translateY(-3.5vh);
-  transition: transform 2s;
+  transform: translateY(-35px);
+  transition: transform 1s;
   z-index: 1000000;
   width: calc(100% - 28px);
   border: black solid 2px;
@@ -23,37 +23,82 @@ nav:hover {
 }
 
 nav ul {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
   height: 100%;
   list-style-type: none;
   margin-top: 0;
   overflow: hidden;
-  background-image: url(/src/images/dobleArrow.svg);
+  /*background-image: url(/src/images/dobleArrow.svg);
   background-color: transparent;
   background-repeat: no-repeat;
   background-size: contain;
   background-size: 15px;
   background-position: bottom center;
-  border-radius: 10px;
+  border-radius: 10px; */
+}
+
+.shortUrl {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.shortUrl input {
+  border: none;
+  background-color: transparent;
+  font-size: 1.5rem;
+  max-width: 600px;
+  min-width: 400px;
+}
+
+.shortUrl input::disabled {
+  background-color: transparent;
+}
+
+nav ul img {
+  width: 15px;
+  height: 15px;
+}
+
+.dropIcons {
+  width: 45px;
+  height: 15px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.dropIconsHide {
+  visibility: hidden;
+}
+
+.dropIconsVisible {
+  transition: visibility 1s ease-in;
+  transition-delay: 1s;
+}
+
+.iconsHide {
+  visibility: hidden;
+}
+
+.iconsVisible {
+  transition: visibility 3s ease-in;
 }
 
 nav ul:hover {
   background-image: none;
 }
 
-nav li {
-  float: left;
-}
-
 nav li svg {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  margin: auto !important;
-  right: 15px;
   cursor: pointer;
   opacity: 0.5;
   transition: opacity ease-in 0.5s;
+  margin: 5px;
 }
+
 nav li svg:hover {
   opacity: 1;
 }

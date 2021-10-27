@@ -9,6 +9,7 @@ const Maximize = lazy(() => import("./icons/Maximize"));
 const Minimize = lazy(() => import("./icons/Minimize"));
 const AutocompletionOn = lazy(() => import("./icons/AutoCompletionOn"));
 const AutocompletionOff = lazy(() => import("./icons/AutoCompletionOff"));
+const CopyLink = lazy(() => import("./icons/CopyLink"));
 
 const sizeMap = {
   small: { with: "15px", height: "15px" },
@@ -17,7 +18,7 @@ const sizeMap = {
 };
 
 export default function (props) {
-  const { type, size = "medium", color = "#dddbdb" } = props;
+  const { type, size = "medium", color = props.color || "#dddbdb" } = props;
   const config = {
     ...props,
     width: sizeMap[size].with,
@@ -25,6 +26,7 @@ export default function (props) {
     fill: color,
   };
   const iconMap = {
+    CopyLink: <CopyLink className="ico" {...config} />,
     CloseEye: <CloseEye className="ico" {...config} />,
     OpenEye: <OpenEye className="ico" {...config} />,
     ZoomIn: <ZoomIn className="ico" {...config} />,
