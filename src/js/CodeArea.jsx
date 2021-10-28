@@ -19,8 +19,6 @@ import "ace-builds/src-noconflict/theme-dracula";
 
 import "ace-builds/src-min-noconflict/ext-language_tools";
 import ActionPanel from "./ActionPanel";
-import EmmetCore from "emmet-core";
-import Emmet from "ace-builds/src-min-noconflict/ext-emmet";
 
 export default function (props) {
   const { codeUpdated } = useDocument();
@@ -32,7 +30,7 @@ export default function (props) {
   const { id, languaje, value } = props;
   const { fontSize, fontSizeSetter, typeHelpers, toggleTypeHelpers } =
     useOptions();
-  const emmet = languaje === "html" && typeHelpers;
+  const emmetEnabled = languaje === "html" && typeHelpers;
   return (
     <div className="code-gride">
       <AceEditor
@@ -46,7 +44,7 @@ export default function (props) {
         onChange={(newValue) => codeUpdated(newValue, id)}
         highlightActiveLine={false}
         enableBasicAutocompletion={typeHelpers}
-        enableLiveAutocompletion={false}
+        enableLiveAutocompletion={typeHelpers}
         enableSnippets={true}
         showPrintMargin={false}
         name={id}
@@ -54,7 +52,6 @@ export default function (props) {
         setOptions={{
           highlightSelectedWord: false,
           useWorker: false,
-          enableEmmet: emmet,
         }}
         style={{
           color: "white",
